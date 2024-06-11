@@ -1,0 +1,179 @@
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+.card-container.card {
+  max-width: 350px !important;
+  padding: 40px 40px;
+}
+
+.card {
+  background-color: #f7f7f7;
+  padding: 20px 25px 30px;
+  margin: 0 auto 25px;
+  margin-top: 50px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.profile-img-card {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 10px;
+  display: block;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+/* App.css */
+.container-custom {
+  background-color: white; /* Dark background */
+  color: #ffffff; /* White text */
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.card-custom {
+  background-color: #333333; /* Darker card background */
+  color: #ffffff; /* White text */
+  border: none;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-custom {
+  background-color: #333333; /* Darker table background */
+  color: #ffffff; /* White text */
+}
+
+.table-custom th,
+.table-custom td {
+  vertical-align: middle;
+}
+
+.btn-light-custom {
+  background-color: #4d4d4d; /* Grey button */
+  border: none;
+  color: #ffffff; /* White text */
+}
+
+.btn-light-custom:hover {
+  background-color: #666666; /* Slightly lighter grey on hover */
+}
+
+.btn-danger-custom {
+  background-color: #ff4c4c; /* Red button */
+  border: none;
+  color: #ffffff; /* White text */
+}
+
+.btn-danger-custom:hover {
+  background-color: #ff1a1a; /* Darker red on hover */
+}
+/* App.css */
+.auth-container {
+  background-color: #1c1c1c; /* Dark background */
+  color: #ffffff; /* White text */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: auto;
+}
+
+.form-group label {
+  color: #ffffff; /* White text */
+}
+
+.form-control,
+.form-select {
+  background-color: white; /* Darker input background */
+  color: #ffffff; /* White text */
+  border: 1px solid #555555; /* Grey border */
+}
+
+.btn-light-custom {
+  background-color: #4d4d4d; /* Grey button */
+  border: none;
+  color: #ffffff; /* White text */
+}
+
+.btn-light-custom:hover {
+  background-color: #666666; /* Slightly lighter grey on hover */
+}
+
+.btn-danger-custom {
+  background-color: #ff4c4c; /* Red button */
+  border: none;
+  color: #ffffff; /* White text */
+}
+
+.btn-danger-custom:hover {
+  background-color: #ff1a1a; /* Darker red on hover */
+}
+
+.card-header-custom {
+  background-color: #333333; /* Darker card header background */
+  color: #ffffff; /* White text */
+}
+
+.card-body-custom {
+  background-color: #1c1c1c; /* Dark card body background */
+  color: #ffffff; /* White text */
+}
+
+.card-footer-custom {
+  background-color: #333333; /* Darker card footer background */
+  color: #ffffff; /* White text */
+}
+
+.table-custom {
+  background-color: #333333; /* Darker table background */
+  color: #ffffff; /* White text */
+}
+
+.table-custom th,
+.table-custom td {
+  vertical-align: middle;
+}
+/* App.css */
+.card-container {
+  background-color: #f1eeee; /* Dark grey background */
+  color: white; /* White text */
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.btn-primary-custom {
+  background-color: #0074D9; /* Blue button */
+  border: none;
+  color: white; /* White text */
+}
+
+.btn-primary-custom:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.alert {
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.navbar-spacer {
+  margin-top: 70px; 
+}
+
+
+.container-custom {
+  background-color: white; 
+  color: #ffffff; 
+  padding: 20px;
+  border-radius: 8px;
+}
+
+
