@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import SystemAdminService from '../services/SystemAdminService';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../App.css'; // Ensure you import the CSS file
 
 const OperatorManagement = () => {
   const [newOperator, setNewOperator] = useState({ operatorName: '', contactInfo: '' });
@@ -74,15 +75,15 @@ const OperatorManagement = () => {
   };
 
   return (
-    <div className="container mt-5 pt-3"> {/* Reduced top padding from pt-5 to pt-3 */}
-      <h2 className="mb-5 pt-5">ADD OPERATOR</h2>
-      <div className="card card-container p-3"> {/* Removed top padding from p-5 to p-3 */}
+    <div className="container mt-5 pt-3">
+      <h2 className="mb-5 pt-5 text-white">ADD OPERATOR</h2>
+      <div className="card card-custom p-3">
         <form onSubmit={handleSubmit} ref={form}>
           <div className="mb-3">
             <label htmlFor="operatorName" className="form-label">Operator Name:</label>
             <input
               type="text"
-              className="form-control"
+              className="form-control form-control-custom"
               id="operatorName"
               name="operatorName"
               value={newOperator.operatorName}
@@ -94,7 +95,7 @@ const OperatorManagement = () => {
             <label htmlFor="contactInfo" className="form-label">Contact Info:</label>
             <input
               type="email"
-              className="form-control"
+              className="form-control form-control-custom"
               id="contactInfo"
               name="contactInfo"
               value={newOperator.contactInfo}
@@ -102,13 +103,13 @@ const OperatorManagement = () => {
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary" disabled={loading}>
+          <button type="submit" className="btn btn-primary-custom" disabled={loading}>
             {loading ? 'Adding...' : 'Add Operator'}
           </button>
         </form>
       </div>
 
-      <table className="table table-striped table-bordered">
+      <table className="table table-custom table-striped table-hover">
         <thead className="thead-dark">
           <tr>
             <th className="text-center">Operator ID</th>
@@ -120,9 +121,9 @@ const OperatorManagement = () => {
         <tbody>
           {operators.map(operator => (
             <tr key={operator.operatorId}>
-              <td className="text-center">{operator.operatorId}</td>
-              <td>{operator.operatorName}</td>
-              <td>{operator.contactInfo}</td>
+              <td className="text-center text-white">{operator.operatorId}</td>
+              <td className="text-white">{operator.operatorName}</td>
+              <td className="text-white">{operator.contactInfo}</td>
               <td className="d-flex justify-content-center">
                 <button className="btn btn-primary btn-sm mx-1" onClick={() => fetchOperator(operator.operatorId)}>View</button>
                 <button className="btn btn-danger btn-sm mx-1" onClick={() => deleteOperator(operator.operatorId)}>Delete</button>

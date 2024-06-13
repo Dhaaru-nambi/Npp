@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import CustomerService from '../services/CustomerService';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css';
 
 function UpdatePortRequest() {
   const navigate = useNavigate();
@@ -51,22 +50,22 @@ function UpdatePortRequest() {
   };
 
   return (
-    <div className="auth-container mt-4">
-      <h2 className="text-center text-white bg-dark p-2 rounded">Update Port Request</h2>
+    <div className="container mt-5">
+      <h2>Update Port Request</h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Request ID :</label>
-          <input type="number" name="requestId" className="form-control" value={portRequestData.requestId || ''} onChange={handleInputChange} required />
+        <div className="mb-3">
+          <label htmlFor="requestId" className="form-label">Request ID :</label>
+          <input type="number" className="form-control" id="requestId" name="requestId" value={portRequestData.requestId || ''} onChange={handleInputChange} />
         </div>
-        <div className="form-group">
-          <label>Customer ID :</label>
-          <input type="number" name="customerId" className="form-control" value={portRequestData.customerId || ''} onChange={handleInputChange} required />
+        <div className="mb-3">
+          <label htmlFor="customerId" className="form-label">Customer ID :</label>
+          <input type="number" className="form-control" id="customerId" name="customerId" value={portRequestData.customerId || ''} onChange={handleInputChange} />
         </div>
-        <div className="form-group">
-          <label>Request Date :</label>
-          <input type="date" name="requestDate" className="form-control" value={portRequestData.requestDate || ''} onChange={handleInputChange} required />
+        <div className="mb-3">
+          <label htmlFor="requestDate" className="form-label">Request Date :</label>
+          <input type="date" className="form-control" id="requestDate" name="requestDate" value={portRequestData.requestDate || ''} onChange={handleInputChange} />
         </div>
-        <button type="submit" className="btn btn-light btn-block btn-light-custom mt-3">Update Port Request</button>
+        <button type="submit" className="btn btn-dark">Update Port Request</button>
       </form>
     </div>
   );

@@ -4,13 +4,11 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import AuthService from "../services/auth-service";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
-
 const required = (value) => {
   if (!value) {
     return (
-      <div className="alert alert-danger" role="alert">
+      <div className="alert alert-danger alert-custom" role="alert">
         This field is required!
       </div>
     );
@@ -71,7 +69,7 @@ const Login = () => {
 
   return (
     <div className="container-fluid vh-100 d-flex align-items-center justify-content-center">
-      <div className="card p-4 shadow-lg border-0 rounded-3 card-container" style={{ maxWidth: '400px', width: '100%' }}>
+      <div className="card p-4 shadow-lg border-0 rounded-3 card-custom" style={{ maxWidth: '400px', width: '100%' }}>
         <div className="card-body">
           <h3 className="card-title text-center mb-4">Sign In</h3>
           <img
@@ -86,7 +84,7 @@ const Login = () => {
               <label htmlFor="username" className="form-label">Username</label>
               <Input
                 type="text"
-                className="form-control rounded-pill"
+                className="form-control form-control-custom rounded-pill"
                 name="username"
                 value={username}
                 onChange={onChangeUsername}
@@ -98,7 +96,7 @@ const Login = () => {
               <label htmlFor="password" className="form-label">Password</label>
               <Input
                 type="password"
-                className="form-control rounded-pill"
+                className="form-control form-control-custom rounded-pill"
                 name="password"
                 value={password}
                 onChange={onChangePassword}
@@ -117,7 +115,7 @@ const Login = () => {
 
             {message && (
               <div className="form-group mt-3">
-                <div className="alert alert-danger" role="alert">
+                <div className="alert alert-danger alert-custom" role="alert">
                   {message}
                 </div>
               </div>
@@ -125,9 +123,9 @@ const Login = () => {
             <CheckButton style={{ display: "none" }} ref={checkBtn} />
           </Form>
         </div>
-        <div className="card-footer text-center">
+        <div className="card-footer text-center card-footer-custom">
           <div className="small">
-            Don't have an account? <Link to="/register" className="link-primary">Sign up</Link>
+            Don't have an account? <Link to="/register" className="link-custom">Sign up</Link>
           </div>
         </div>
       </div>

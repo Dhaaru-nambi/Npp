@@ -1,29 +1,29 @@
 import React from "react";
 import AuthService from "../services/auth-service";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css';
 
 const Profile = () => {
   const currentUser = AuthService.getCurrentUser();
 
   return (
-    <div className="container mt-5">
-      <header className="jumbotron bg-dark text-white p-4 shadow-sm rounded">
-        <h3>
-          <strong>{currentUser.username}</strong> Profile
-        </h3>
-      </header>
-      <p>
-        <strong>Token:</strong> {currentUser.accessToken.substring(0, 20)} ...{" "}
-        {currentUser.accessToken.substr(currentUser.accessToken.length - 20)}
-      </p>
-      <p>
-        <strong>Id:</strong> {currentUser.id}
-      </p>
-      <strong>Authorities:</strong>
-      <ul>
-        {currentUser.role}
-      </ul>
+    <div className="container mt-5 navbar-spacer">
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <div className="card shadow card-custom">
+            <div className="card-body card-body-custom">
+              <h3 className="card-title mb-4 text-center" style={{ padding: '15px', borderRadius: '10px', height: '60px', fontFamily: 'initial' }}>USER PROFILE</h3>
+              <div className="mb-3">
+                <strong>Username:</strong> {currentUser.username}
+              </div>
+              <div className="mb-3">
+                <strong>ID:</strong> {currentUser.id}
+              </div>
+              <div className="mb-3">
+                <strong>Authorities:</strong> {currentUser.role}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

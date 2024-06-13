@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import AuthService from "./services/auth-service";
+import EventBus from "./common/EventBus";
 
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
 import Profile from "./components/Profile";
-
-import EventBus from "./common/EventBus";
 import UserManagement from "./forms/UserManagement";
 import UpdateUser from "./forms/UpdateUser";
 import OperatorManagement from "./forms/OperatorManagement";
-import UpdateOperator from "./forms/UpdateOperator"
+import UpdateOperator from "./forms/UpdateOperator";
 import CustomerServiceManagement from "./forms/CustomerServiceManagement";
 import UpdateCustomer from "./forms/UpdateCustomer";
 import PortRequestManagement from "./forms/PortRequestManagement";
@@ -22,31 +21,31 @@ import UpdatePortRequest from "./forms/UpdatePortRequest";
 import LogManagement from "./forms/LogManagement";
 import UpdateLog from "./forms/UpdateLog";
 
-
 const App = () => {
   const [showSystemAdmin, setShowSystemAdmin] = useState(false);
   const [showCustomerService, setShowCustomerService] = useState(false);
   const [showComplianceOfficer, setShowComplianceOfficer] = useState(false);
   const [currentUser, setCurrentUser] = useState(undefined);
+  const navigate = useNavigate(); // Hook for navigation
 
   useEffect(() => {
     const user = AuthService.getCurrentUser();
 
     if (user) {
       setShowSystemAdmin(user.role.includes("ROLE_SYSTEM_ADMIN"));
-      setCurrentUser(user);
       setShowCustomerService(user.role.includes("ROLE_CUSTOMER_SERVICE"));
-      setCurrentUser(user);
-      console.log(currentUser);
       setShowComplianceOfficer(user.role.includes("ROLE_COMPLIANCE_OFFICER"));
       setCurrentUser(user);
     }
-    EventBus.on("logout", () => {
+
+    const handleLogout = () => {
       logOut();
-    });
+    };
+
+    EventBus.on("logout", handleLogout);
 
     return () => {
-      EventBus.remove("logout");
+      EventBus.remove("logout", handleLogout);
     };
   }, []);
 
@@ -56,13 +55,14 @@ const App = () => {
     setShowCustomerService(false);
     setShowComplianceOfficer(false);
     setCurrentUser(undefined);
+    navigate("/login"); // Use navigate to redirect to login page
   };
 
   return (
     <div>
-      <nav className="navbar fixed-top navbar-expand navbar-dark bg-dark">
+      <nav className="navbar fixed-top navbar-expand custom-navbar">
         <Link to={"/"} className="navbar-brand">
-        NUMBER PORTABILITY PORTAL
+          NUMBER PORTABILITY PORTAL
         </Link>
         <div className="navbar-nav mr-auto">
           <li className="nav-item">
@@ -74,7 +74,7 @@ const App = () => {
           {showSystemAdmin && (
             <li className="nav-item">
               <Link to={"/usermanagement"} className="nav-link">
-              User Dashboard
+                User Dashboard
               </Link>
             </li>
           )}
@@ -132,7 +132,6 @@ const App = () => {
                 Sign in
               </Link>
             </li>
-
             <li className="nav-item">
               <Link to={"/register"} className="nav-link">
                 Sign up
@@ -144,25 +143,23 @@ const App = () => {
 
       <div className="container mt-3">
         <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/home" element={<Home/>} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/register" element={<Register/>} />
-          <Route path="/profile" element={<Profile/>} />
-          {/* <Route path="/admin" element={<SystemAdminDashboard/>} /> */}
-          <Route path="/customermanagement" element={<CustomerServiceManagement/>} />
-          <Route path="/handleportrequest" element={<PortRequestManagement/>} />
-          <Route path="/update-customer/:customerId" element={<UpdateCustomer/>} />
-          <Route path="/update-portrequest/:requestId" element={<UpdatePortRequest/>} />
-          <Route path="/usermanagement" element={<UserManagement/>} />
-          <Route path="/operatormanagement" element={<OperatorManagement/>} />
-          <Route path="/update-userrole/:userId" element={<UpdateUser/>} />
-          <Route path="/update-operator/:operatorId" element={<UpdateOperator/>} />
-          <Route path="/compliancelogs" element={<LogManagement/>} />
-          <Route path="/update-log/:logId" element={<UpdateLog/>} />
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/customermanagement" element={<CustomerServiceManagement />} />
+          <Route path="/handleportrequest" element={<PortRequestManagement />} />
+          <Route path="/update-customer/:customerId" element={<UpdateCustomer />} />
+          <Route path="/update-portrequest/:requestId" element={<UpdatePortRequest />} />
+          <Route path="/usermanagement" element={<UserManagement />} />
+          <Route path="/operatormanagement" element={<OperatorManagement />} />
+          <Route path="/update-userrole/:userId" element={<UpdateUser />} />
+          <Route path="/update-operator/:operatorId" element={<UpdateOperator />} />
+          <Route path="/compliancelogs" element={<LogManagement />} />
+          <Route path="/update-log/:logId" element={<UpdateLog />} />
         </Routes>
       </div>
-
     </div>
   );
 };

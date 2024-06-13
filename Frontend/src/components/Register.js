@@ -1,16 +1,15 @@
 import React, { useState, useRef } from "react";
+import { Link } from 'react-router-dom';
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import { Link } from "react-router-dom";
+
 import AuthService from "../services/auth-service";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css';
 
 const required = (value) => {
   if (!value) {
     return (
-      <div className="alert alert-danger" role="alert">
+      <div className="alert alert-danger alert-custom" role="alert">
         This field is required!
       </div>
     );
@@ -20,7 +19,7 @@ const required = (value) => {
 const vusername = (value) => {
   if (value.length < 3 || value.length > 20) {
     return (
-      <div className="alert alert-danger" role="alert">
+      <div className="alert alert-danger alert-custom" role="alert">
         The username must be between 3 and 20 characters.
       </div>
     );
@@ -30,7 +29,7 @@ const vusername = (value) => {
 const vpassword = (value) => {
   if (value.length < 6 || value.length > 40) {
     return (
-      <div className="alert alert-danger" role="alert">
+      <div className="alert alert-danger alert-custom" role="alert">
         The password must be between 6 and 40 characters.
       </div>
     );
@@ -64,8 +63,10 @@ const Register = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
+
     setMessage("");
     setSuccessful(false);
+
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
@@ -76,9 +77,12 @@ const Register = () => {
         },
         (error) => {
           const resMessage =
-            (error.response && error.response.data && error.response.data.message) ||
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
             error.message ||
             error.toString();
+
           setMessage(resMessage);
           setSuccessful(false);
         }
@@ -87,8 +91,8 @@ const Register = () => {
   };
 
   return (
-    <div className="container vh-100 d-flex align-items-center justify-content-center">
-      <div className="card p-4 shadow-lg border-0 rounded-3 card-container" style={{ maxWidth: '400px', width: '100%' }}>
+    <div className="container-fluid vh-100 d-flex align-items-center justify-content-center">
+      <div className="card p-4 shadow-lg border-0 rounded-3 card-custom" style={{ maxWidth: '400px', width: '100%' }}>
         <div className="card-body">
           <h3 className="card-title text-center mb-4">Sign Up</h3>
           <img
@@ -97,6 +101,7 @@ const Register = () => {
             className="profile-img-card rounded-circle mx-auto d-block mb-3"
             style={{ width: "100px", height: "100px" }}
           />
+
           <Form onSubmit={handleRegister} ref={form}>
             {!successful && (
               <div>
@@ -104,48 +109,57 @@ const Register = () => {
                   <label htmlFor="username" className="form-label">Username</label>
                   <Input
                     type="text"
-                    className="form-control rounded-pill"
+                    className="form-control form-control-custom rounded-pill"
                     name="username"
                     value={username}
                     onChange={onChangeUsername}
                     validations={[required, vusername]}
                   />
                 </div>
+
                 <div className="form-group mb-3">
                   <label htmlFor="password" className="form-label">Password</label>
                   <Input
                     type="password"
-                    className="form-control rounded-pill"
+                    className="form-control form-control-custom rounded-pill"
                     name="password"
                     value={password}
                     onChange={onChangePassword}
                     validations={[required, vpassword]}
                   />
                 </div>
+
                 <div className="form-group mb-3">
                   <label htmlFor="operatorId" className="form-label">Operator Id</label>
                   <Input
                     type="text"
-                    className="form-control rounded-pill"
+                    className="form-control form-control-custom rounded-pill"
                     name="operatorId"
                     value={operatorId}
                     onChange={onChangeOperatorId}
                     validations={[required]}
                   />
                 </div>
+                
                 <div className="d-grid mb-3">
-                  <button className="btn btn-dark btn-block rounded-pill btn-primary-custom">Sign Up</button>
+                  <button className="btn btn-primary btn-block rounded-pill btn-primary-custom">Sign Up</button>
                 </div>
-                <div className="card-footer text-center">
+                <div className="card-footer text-center card-footer-custom">
                   <div className="small">
-                    Already have an account? <Link to="/login" className="link-light">Sign in</Link>
+                    Already have an account? <Link to="/login" className="link-custom">Sign in</Link>
                   </div>
                 </div>
               </div>
             )}
+
             {message && (
               <div className="form-group">
-                <div className={successful ? "alert alert-success" : "alert alert-danger"} role="alert">
+                <div
+                  className={
+                    successful ? "alert alert-success alert-custom" : "alert alert-danger alert-custom"
+                  }
+                  role="alert"
+                >
                   {message}
                 </div>
               </div>

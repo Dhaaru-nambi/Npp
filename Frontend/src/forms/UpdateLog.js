@@ -1,26 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import ComplianceOfficerService from '../services/ComplianceOfficer';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css';
-
+import ComplianceOfficerService from '../services/ComplianceOfficerService';
+ 
 function UpdateLog() {
   const navigate = useNavigate();
   const { logId } = useParams();
-
+ 
   const [logData, setLogData] = useState({
     portRequestId: '',
     checkPassed: '',
     notes: '',
     checkDate: ''
   });
-
+ 
   useEffect(() => {
     fetchLogDataById(logId);
   }, [logId]);
-
+ 
   const fetchLogDataById = async (logId) => {
     try {
+       
       const response = await ComplianceOfficerService.getLog(logId);
       if (response) {
         setLogData(response);
@@ -31,7 +30,7 @@ function UpdateLog() {
       console.error('Error fetching log data : ', error);
     }
   };
-
+ 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setLogData((prevLogData) => ({
@@ -39,7 +38,7 @@ function UpdateLog() {
       [name]: value
     }));
   };
-
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -50,35 +49,36 @@ function UpdateLog() {
       alert(error.message || 'An error occurred while updating log.');
     }
   };
-
+ 
   return (
-    <div className="auth-container mt-4">
-      <h2 className="text-center text-white bg-dark p-2 rounded">Update Log</h2>
+    <div className="auth-container">
+      <h2>Update Log</h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
+      <div className="form-group">
           <label>Log ID :</label>
-          <input type="number" name="logId" className="form-control" value={logData.logId || ''} onChange={handleInputChange} required />
+          <input type="number" name="logId" value={logData.logId || ''} onChange={handleInputChange} />
         </div>
         <div className="form-group">
           <label>Port Request ID :</label>
-          <input type="number" name="portRequestId" className="form-control" value={logData.portRequestId || ''} onChange={handleInputChange} required />
+          <input type="number" name="portRequestId" value={logData.portRequestId || ''} onChange={handleInputChange} />
         </div>
         <div className="form-group">
           <label>Check Passed :</label>
-          <input type="text" name="checkPassed" className="form-control" value={logData.checkPassed || ''} onChange={handleInputChange} required />
+          <input type="text" name="checkPassed" value={logData.checkPassed || ''} onChange={handleInputChange} />
         </div>
         <div className="form-group">
           <label>Notes :</label>
-          <input type="text" name="notes" className="form-control" value={logData.notes || ''} onChange={handleInputChange} required />
+          <input type="text" name="notes" value={logData.notes || ''} onChange={handleInputChange} />
         </div>
         <div className="form-group">
           <label>Check Date :</label>
-          <input type="date" name="checkDate" className="form-control" value={logData.checkDate || ''} onChange={handleInputChange} required />
+          <input type="date" name="checkDate" value={logData.checkDate || ''} onChange={handleInputChange} />
         </div>
-        <button type="submit" className="btn btn-light btn-block btn-light-custom mt-3">Update Log</button>
+        <button className="log-button" type="submit">Update</button>
+        
       </form>
     </div>
   );
 }
-
+ 
 export default UpdateLog;

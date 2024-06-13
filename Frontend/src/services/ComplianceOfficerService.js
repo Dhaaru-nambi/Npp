@@ -20,7 +20,7 @@ const addLog = async (logData) => {
 
 const getLog = async (logId) => {
   try {
-    const response = await axios.post(`${BASE_URL}/getlog`, logId, {
+    const response = await axios.get(`${BASE_URL}/getlog?logId=${logId}`, {
       headers: {
         'Content-Type': 'application/json',
         ...authHeader(),

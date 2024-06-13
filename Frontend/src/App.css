@@ -32,8 +32,8 @@ label {
 }
 /* App.css */
 .container-custom {
-  background-color: white; /* Dark background */
-  color: #ffffff; /* White text */
+  background-color: #ffffff61; /* Dark background */
+  color: black; /* White text */
   padding: 20px;
   border-radius: 8px;
 }
@@ -175,5 +175,20 @@ label {
   padding: 20px;
   border-radius: 8px;
 }
+.custom-navbar {
+  background-color: black;
+}
 
+.custom-navbar .nav-link, 
+.custom-navbar .navbar-brand {
+  color: white !important;
+}
 
+.custom-navbar .nav-link:hover,
+.custom-navbar .navbar-brand:hover {
+  color: #d4d4d4 !important; /* Slightly lighter color on hover */
+}
+
+.container {
+  margin-top: 80px; /* To avoid overlap with fixed navbar */
+}

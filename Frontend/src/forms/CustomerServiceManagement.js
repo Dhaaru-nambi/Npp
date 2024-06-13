@@ -1,9 +1,10 @@
 import CustomerService from '../services/CustomerService';
 import { useNavigate, Link } from 'react-router-dom';
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
+import { useRef, useEffect } from 'react';
+ 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css';
-
+ 
 const CustomerServiceManagement = () => {
   const [newCustomer, setNewCustomer] = useState({
     name: '',
@@ -16,14 +17,14 @@ const CustomerServiceManagement = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [selectedCustomer, setSelectedCustomer] = useState(null);
-
+ 
   const form = useRef();
   const navigate = useNavigate();
-
+ 
   useEffect(() => {
     fetchCustomers();
   }, []);
-
+ 
   const fetchCustomers = () => {
     CustomerService.viewCustomers()
       .then(response => {
@@ -39,7 +40,7 @@ const CustomerServiceManagement = () => {
     const { name, value } = e.target;
     setNewCustomer({ ...newCustomer, [name]: value });
   };
-
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -64,11 +65,11 @@ const CustomerServiceManagement = () => {
         setLoading(false);
       });
   };
-
+ 
   const fetchCustomer = async (customerId) => {
     try {
       const customer = await CustomerService.getCustomer(customerId);
-      setSelectedCustomer(customer);
+      setSelectedCustomer(customer); // Set the selected device
     } catch (error) {
       console.error('Error fetching customer by ID:', error);
     }
@@ -86,18 +87,18 @@ const CustomerServiceManagement = () => {
         });
     }
   };
-
+ 
   return (
-    <div className="container mt-4 container-custom">
-      <h2 className="text-center bg-dark p-2 rounded">Add Customer</h2>
-      <div className="card card-container bg-dark text-white p-4 mb-4 rounded card-custom">
+    <div className="container">
+      <h2 className="text-white">Add Customer</h2>
+      <div className="card card-container bg-dark text-white">
         <form onSubmit={handleSubmit} ref={form}>
           <div className="mb-3">
-            <label htmlFor="name" className="form-label">Customer Name :</label>
+            <label htmlFor="name" className="form-label">Customer Name : </label>
             <input type="text" className="form-control" id="name" name="name" value={newCustomer.name} onChange={handleInputChange} required />
           </div>
           <div className="mb-3">
-            <label htmlFor="email" className="form-label">Email :</label>
+            <label htmlFor="email" className="form-label">Email : </label>
             <input type="email" className="form-control" id="email" name="email" value={newCustomer.email} onChange={handleInputChange} required />
           </div>
           <div className="mb-3">
@@ -112,11 +113,12 @@ const CustomerServiceManagement = () => {
             <label htmlFor="newOperatorId" className="form-label">New Operator ID :</label>
             <input type="number" className="form-control" id="newOperatorId" name="newOperatorId" value={newCustomer.newOperatorId} onChange={handleInputChange} required />
           </div>
-          <button type="submit" className="btn btn-light btn-block btn-light-custom" disabled={loading}>Add Customer</button>
+          
+          <button type="submit" className="btn btn-primary" disabled={loading}>Add Customer</button>
         </form>
       </div>
-
-      <table className="table table-striped table-dark mt-4 table-custom">
+ 
+      <table className="table mt-4">
         <thead>
           <tr>
             <th>Customer ID</th>
@@ -140,17 +142,18 @@ const CustomerServiceManagement = () => {
               <td>{customer.currentOperator.operatorId}</td>
               <td>{customer.newOperator.operatorId}</td>
               <td>
-                <button className="btn btn-light btn-sm me-2 btn-light-custom" onClick={() => fetchCustomer(customer.customerId)}>View</button>
-                <button className="btn btn-danger btn-sm me-2 btn-danger-custom" onClick={() => deleteCustomer(customer.customerId)}>Delete</button>
-                <Link to={`/update-customer/${customer.customerId}`} className="btn btn-light btn-sm btn-light-custom">Update</Link>
+              <button className="btn btn-primary" onClick={() => fetchCustomer(customer.customerId)}>View</button>
+                <button className="btn btn-danger" onClick={() => deleteCustomer(customer.customerId)}>Delete</button>
+                {/* <button><Link to={`/update-customer/${customer.customerId}`}> Update</Link></button> */}
+                <Link to={`/update-customer/${customer.customerId}`} className="btn btn-info">Update</Link>
+
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-
       {selectedCustomer && (
-        <div className="bg-dark text-white p-4 rounded mt-4 card-custom">
+        <div>
           <h3>Customer Details :</h3>
           <p>Customer Name : {selectedCustomer.name}</p>
           <p>Customer Email : {selectedCustomer.email}</p>
@@ -159,9 +162,9 @@ const CustomerServiceManagement = () => {
           <p>Customer Current Operator Id : {selectedCustomer.currentOperator.operatorId}</p>
           <p>Customer New Operator Id : {selectedCustomer.newOperator.operatorId}</p>
         </div>
-      )}
+     )}
     </div>
   );
 };
-
+ 
 export default CustomerServiceManagement;

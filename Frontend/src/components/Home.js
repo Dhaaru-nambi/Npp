@@ -22,7 +22,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="container mt-5 navbar-spacer">
+      <div className="container mt-5 navbar-spacer">
       <header className="jumbotron bg-dark text-white p-4 shadow-sm rounded">
         <h3 className="text-center">{content}</h3>
       </header>

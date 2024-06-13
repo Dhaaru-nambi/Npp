@@ -1,10 +1,9 @@
-import ComplianceOfficerService from '../services/ComplianceOfficer';
+import ComplianceOfficerService from '../services/ComplianceOfficerService';
 import { useNavigate, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useRef, useEffect } from 'react';
- 
 import 'bootstrap/dist/css/bootstrap.min.css';
- 
+
 const LogManagement = () => {
   const [newLog, setNewLog] = useState({
     portRequestId: '',
@@ -16,14 +15,14 @@ const LogManagement = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [selectedLog, setSelectedLog] = useState(null);
- 
+
   const form = useRef();
   const navigate = useNavigate();
- 
+
   useEffect(() => {
     fetchLogs();
   }, []);
- 
+
   const fetchLogs = () => {
     ComplianceOfficerService.viewLogs()
       .then(response => {
@@ -39,7 +38,7 @@ const LogManagement = () => {
     const { name, value } = e.target;
     setNewLog({ ...newLog, [name]: value });
   };
- 
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -48,10 +47,10 @@ const LogManagement = () => {
       .then(() => {
         alert('Log added successfully');
         setNewLog({
-            portRequestId: '',
-            checkPassed: '',
-            notes: '',
-            checkDate: ''
+          portRequestId: '',
+          checkPassed: '',
+          notes: '',
+          checkDate: ''
         });
         fetchLogs();
       })
@@ -63,7 +62,7 @@ const LogManagement = () => {
         setLoading(false);
       });
   };
- 
+
   const fetchLog = async (logId) => {
     try {
       const log = await ComplianceOfficerService.getLog(logId);
@@ -72,33 +71,33 @@ const LogManagement = () => {
       console.error('Error fetching log by ID : ', error);
     }
   };
- 
+
   return (
     <div className="container">
-      <h2>Add Log</h2>
-      <div className="card card-container">
+      <h2 style={{ color: 'white' }}>Add Log</h2>
+      <div className="card card-container bg-dark text-white">
         <form onSubmit={handleSubmit} ref={form}>
           <div className="mb-3">
-            <label htmlFor="portRequestId" className="form-label">Port Request ID : </label>
+            <label htmlFor="portRequestId" className="form-label" style={{ color: 'white' }}>Port Request ID : </label>
             <input type="number" className="form-control" id="portRequestId" name="portRequestId" value={newLog.portRequestId} onChange={handleInputChange} required />
           </div>
           <div className="mb-3">
-            <label htmlFor="checkPassed" className="form-label">Check Passed : </label>
+            <label htmlFor="checkPassed" className="form-label" style={{ color: 'white' }}>Check Passed : </label>
             <input type="text" className="form-control" id="checkPassed" name="checkPassed" value={newLog.checkPassed} onChange={handleInputChange} required />
           </div>
           <div className="mb-3">
-            <label htmlFor="notes" className="form-label">Notes : </label>
+            <label htmlFor="notes" className="form-label" style={{ color: 'white' }}>Notes : </label>
             <input type="text" className="form-control" id="notes" name="notes" value={newLog.notes} onChange={handleInputChange} required />
           </div>
           <div className="mb-3">
-            <label htmlFor="checkDate" className="form-label">Check Date : </label>
+            <label htmlFor="checkDate" className="form-label" style={{ color: 'white' }}>Check Date : </label>
             <input type="date" className="form-control" id="checkDate" name="checkDate" value={newLog.checkDate} onChange={handleInputChange} required />
           </div>
           <button type="submit" className="btn btn-primary" disabled={loading}>Add Log</button>
         </form>
       </div>
- 
-      <table className="table mt-4">
+
+      <table className="table mt-4" style={{ color: 'white' }}>
         <thead>
           <tr>
             <th>Log ID</th>
@@ -118,8 +117,8 @@ const LogManagement = () => {
               <td>{log.notes}</td>
               <td>{log.checkDate}</td>
               <td>
-              <button className="btn btn-primary" onClick={() => fetchLog(log.logId)}>View</button>
-                <button><Link to={`/update-log/${log.logId}`}> Update Log </Link></button>
+                <button className="btn btn-primary" onClick={() => fetchLog(log.logId)}>View</button>
+                <button><Link to={`/update-log/${log.logId}`} style={{ color: 'white' }}> Update Log </Link></button>
               </td>
             </tr>
           ))}
@@ -133,9 +132,9 @@ const LogManagement = () => {
           <p>Notes : {selectedLog.notes}</p>
           <p>Check Date : {selectedLog.checkDate}</p>
         </div>
-     )}
+      )}
     </div>
   );
 };
- 
+
 export default LogManagement;
